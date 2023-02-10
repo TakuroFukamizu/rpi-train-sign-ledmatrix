@@ -1,0 +1,48 @@
+{
+  "jb20": { // 浅草橋駅　中央・総武線各駅停車
+    // refs. https://www.jreast-timetable.jp/timetable/list0047.html
+    "west": { // 御茶ノ水・四ツ谷方面 (西行)
+      "weekday": [ // 平日
+        { "id": "481B", "time": "05:00", "destination": "三鷹", "type": "local" },
+        { "id": "403C", "time": "05:20", "destination": "三鷹", "type": "local" },
+        { "id": "469B", "time": "05:35", "destination": "三鷹", "type": "local" },
+        { "time": "05:47", "destination": "三鷹", "type": "local" },
+        { "time": "05:57", "destination": "三鷹", "type": "local" },
+        { "time": "06:07", "destination": "三鷹", "type": "local" },
+        { "time": "06:16", "destination": "三鷹", "type": "local" },
+        { "time": "06:24", "destination": "中野", "type": "local" },
+        { "time": "06:33", "destination": "三鷹", "type": "local" },
+        // 中略
+        { "time": "22:00", "destination": "中野", "type": "local" },
+        { "time": "22:07", "destination": "三鷹", "type": "local" },
+        { "time": "22:15", "destination": "中野", "type": "local" },
+        { "time": "22:21", "destination": "三鷹", "type": "local" },
+        { "time": "22:27", "destination": "中野", "type": "local" },
+        { "time": "22:34", "destination": "三鷹", "type": "local" },
+        { "time": "22:41", "destination": "三鷹", "type": "local" },
+        { "time": "22:47", "destination": "三鷹", "type": "local" },
+        { "time": "22:54", "destination": "中野", "type": "local" },
+        { "time": "23:00", "destination": "三鷹", "type": "local" },
+        { "time": "23:07", "destination": "中野", "type": "local" },
+        { "time": "23:15", "destination": "三鷹", "type": "local" },
+        { "time": "23:22", "destination": "中野", "type": "local" },
+        { "time": "23:30", "destination": "三鷹", "type": "local" },
+        { "time": "23:37", "destination": "三鷹", "type": "local" },
+        { "time": "23:44", "destination": "三鷹", "type": "local" },
+        { "time": "23:52", "destination": "三鷹", "type": "local" },
+        { "time": "00:00", "destination": "中野", "type": "local" },
+        { "time": "00:07", "destination": "三鷹", "type": "local" },
+        { "time": "00:13", "destination": "三鷹", "type": "local" },
+        { "time": "00:23", "destination": "中野", "type": "local" },
+        { "time": "00:31", "destination": "中野", "type": "local" }
+      ]
+    }
+  },
+  "jy23": { // 五反田駅 山手線
+    "outer": { // 渋谷・新宿方面 (外回り)
+      "weekday": [ // 平日
+        { "time": "04:30", "destination": "渋谷・新宿方面", "type": "local" }
+      ]
+    }
+  }
+}
