@@ -2,7 +2,7 @@ import sys
 import time
 from datetime import datetime, timezone, timedelta
 from collections import namedtuple
-# from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from usecase.timeline import TimelineUsecase
 
@@ -24,39 +24,31 @@ def init_image():
     return image, draw
 
 def main():
-    # try:
-    #     # matrix = get_matrix()
+    try:
+        matrix = get_matrix()
 
-    #     print("Press CTRL-C to stop.")
-    #     while True:
-    #         image = drwa_image()
-    #         # matrix.SetImage(image.convert('RGB'))
-    #         time.sleep(2)
+        # 時刻表データ取得
+        timelineUsecase = TimelineUsecase()
+        timelineUsecase.load('./timeline.jsonc')
 
-    # except KeyboardInterrupt:
-    #     sys.exit(0)
+        print("Press CTRL-C to stop.")
+        while True:
+            now = datetime.now(JST) # 現在時刻取得
+            print(now.hour)
+            print(now.minute)
 
-    # test
+            # 現在時刻以降で最も速く来る電車
+            values = timelineUsecase.get_nearlest_trais('jb20', 'west', now, True)
+            print(values)
 
-    # 時刻表データ取得
-    timelineUsecase = TimelineUsecase()
-    timelineUsecase.load('./timeline.jsonc')
+            # LED表示内容の描画
+            image = draw_timetable(values)
+            matrix.SetImage(image.convert('RGB'))
+            time.sleep(100)
 
-    now = datetime.now(JST) # 現在時刻取得
-    print(now.hour)
-    print(now.minute)
+    except KeyboardInterrupt:
+        sys.exit(0)
 
-    # 現在時刻以降で最も速く来る電車
-    values = timelineUsecase.get_nearlest_trais('jb20', 'west', now, True)
-    print(values)
-    
-    # LED表示内容の描画
-    image = draw_timetable(values)
-
-    # image = drwa_image()
-
-    img = image.convert('RGB')
-    img.save('output.png')
 
 def draw_distination(draw: ImageDraw, line: int, value: str):
     text_len = len(value)
@@ -109,22 +101,22 @@ def drwa_image():
 
     return image
 
-# def get_matrix():
-#     # Configuration for the matrix
-#     options = RGBMatrixOptions()
-#     options.rows = 32
-#     options.cols = 64
-#     options.chain_length = 1
-#     options.parallel = 1
-#     options.hardware_mapping = 'regular'
+def get_matrix():
+    # Configuration for the matrix
+    options = RGBMatrixOptions()
+    options.rows = 32
+    options.cols = 128
+    options.chain_length = 1
+    options.parallel = 1
+    options.hardware_mapping = 'regular'
 
-#     options.gpio_slowdown = 5
-#     options.limit_refresh_rate_hz = 120
-#     # options.show_refresh_rate = 1
-#     options.brightness = 50
-#     options.disable_hardware_pulsing = True
+    options.gpio_slowdown = 5
+    options.limit_refresh_rate_hz = 120
+    # options.show_refresh_rate = 1
+    options.brightness = 50
+    options.disable_hardware_pulsing = True
 
-#     return RGBMatrix(options = options)
+    return RGBMatrix(options = options)
 
 
 if __name__ == '__main__':
