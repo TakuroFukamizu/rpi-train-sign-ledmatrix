@@ -112,8 +112,8 @@ def get_matrix():
 
     options.gpio_slowdown = 5
     options.limit_refresh_rate_hz = 120
-    # options.show_refresh_rate = 1
-    options.brightness = 50
+    options.show_refresh_rate = 1
+    options.brightness = 100
     options.disable_hardware_pulsing = True
 
     return RGBMatrix(options = options)
