@@ -1,17 +1,33 @@
 import sys
+import os
 import time
 from datetime import datetime, timezone, timedelta
 from collections import namedtuple
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+import PySimpleGUI as psg
 from usecase.timeline import TimelineUsecase
 
+pwd = os.path.abspath(__file__)
+os.chdir(os.path.dirname(os.path.join(os.path.abspath(__file__), '..')))
+
 fonts = {
-    'jiskan16': ImageFont.truetype('./fonts/JF-Dot-jiskan16.ttf', 16),
-    'msgothic': ImageFont.truetype('./fonts/msgothic.ttc', 16)
+    'jiskan16': ImageFont.truetype(os.path.join(pwd, '../fonts/JF-Dot-jiskan16.ttf'), 16),
+    'msgothic': ImageFont.truetype(os.path.join(pwd, '../fonts/msgothic.ttc'), 16)
 }
 
 JST = timezone(timedelta(hours=9), 'JST')
+
+#レイアウト
+layout = [
+    [psg.Text("ロボットの動作を選択してください")],
+    [psg.Button("前進", size=(15, 1), key="BTN_FORWARD")],
+    [psg.Button("左回転", size=(7, 1), key="BTN_LEFT"),psg.Button("右回転", size=(7, 1), key="BTN_RIGHT")],
+    [psg.Button("後退", size=(15, 1), key="BTN_BACKWARD")],
+    [psg.Button("終了", size=(7, 1), key="BTN_EXIT")]]
+    
+#ウインドウを表示
+win = psg.Window('コントロールパネル', layout)
 
 def init_image():
     # Initialize image
@@ -108,7 +124,7 @@ def get_matrix():
     options.cols = 128
     options.chain_length = 1
     options.parallel = 1
-    options.hardware_mapping = 'regular'
+    options.hardware_mapping = 'adafruit-hat'
 
     options.gpio_slowdown = 5
     options.limit_refresh_rate_hz = 120
